@@ -248,12 +248,9 @@
                 
                 card.innerHTML = `
                     <div>
-                        <div class="flex justify-between items-start gap-4 mb-3">
-                            <div>
-                                <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wide uppercase">${wmsName}</span>
-                                <h3 class="text-base font-bold text-slate-900 dark:text-slate-100 mt-0.5">Transaction: EDI ${txnType}</h3>
-                            </div>
-                            <span class="px-2.5 py-1 text-xs font-semibold rounded-md border bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800">Active Map</span>
+                        <div class="mb-3">
+                            <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wide uppercase">${wmsName}</span>
+                            <h3 class="text-base font-bold text-slate-900 dark:text-slate-100 mt-0.5">Transaction: EDI ${txnType}</h3>
                         </div>
 
                         <div class="bg-indigo-900 dark:bg-indigo-950 text-white rounded-lg p-3.5 mb-4 shadow-sm border border-indigo-800">
@@ -317,7 +314,7 @@
         function resetAllFilters() {
             document.getElementById('wmsFilter').value = 'ALL';
             updateTransactionDropdown(); 
-            document.getElementById('transactionFilter').value = 'ALL'; // Explicitly force transaction dropdown back to 'All Transactions'
+            document.getElementById('transactionFilter').value = 'ALL'; 
             clearSearch();
         }
     </script>
