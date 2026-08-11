@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDI Golden Build Map Repository</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-sans antialiased min-h-screen flex flex-col transition-colors duration-200">
+
+    <header class="bg-indigo-700 dark:bg-indigo-950 text-white shadow-md transition-colors duration-200">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight">EDI Golden Build Map Repository</h1>
+                <p class="text-indigo-200 text-sm">Centralized transaction mapping and scenario repository</p>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button onclick="toggleDarkMode()" class="bg-indigo-800 dark:bg-indigo-900 hover:bg-indigo-600 dark:hover:bg-indigo-800 text-indigo-100 px-3.5 py-2 rounded-lg text-xs font-medium border border-indigo-600 dark:border-indigo-700 transition-all flex items-center gap-2 shadow-sm">
+                    <span id="themeIcon">&#9728;</span> <span id="themeText">Dark Mode</span>
+                </button>
+                <span class="bg-indigo-800 dark:bg-indigo-900 text-indigo-100 text-xs px-3 py-1.5 rounded-full font-medium border border-indigo-600 dark:border-indigo-700 hidden sm:inline-block">EDI Portal</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-8 flex-grow w-full">
+        
+        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 mb-8 transition-colors duration-200">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Search & Filter Criteria</span>
+                <button onclick="resetAllFilters()" class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors flex items-center gap-1">
+                    <span>&#8634;</span> Reset All Filters
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <label for="wmsFilter" class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Select WMS System</label>
+                    <select id="wmsFilter" onchange="onWmsChange()" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3.5 py-2.5 text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                        <option value="ALL">All WMS Systems</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="transactionFilter" class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Transaction Type</label>
+                    <select id="transactionFilter" onchange="filterData()" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3.5 py-2.5 text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                        <option value="ALL">All Transactions</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="searchInput" class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Search Scenarios / Keywords</label>
+                    <div class="relative">
+                        <input type="text" id="searchInput" onkeyup="filterData()" placeholder="e.g., Pallet, Short ship, LPN..." class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg pl-3.5 pr-10 py-2.5 text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                        <button onclick="clearSearch()" id="clearSearchBtn" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm hidden font-bold px-1.5 py-0.5 rounded transition-colors" title="Clear Search">&times;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Applicable Scenarios & Map Matrix</h2>
+            <span id="resultCount" class="text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 px-3 py-1 rounded-full">Loading data...</span>
+        </div>
+
+        <div id="cardsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            </div>
+
+        <div id="noResults" class="hidden text-center py-16 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 mt-2 transition-colors duration-200">
+            <p class="text-slate-400 dark:text-slate-500 text-base font-medium">No golden build maps found matching your criteria.</p>
+            <button onclick="resetAllFilters()" class="mt-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 text-sm font-semibold">Clear all filters</button>
+        </div>
+    </main>
+
+    <footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 mt-auto py-4 text-center text-xs text-slate-400 dark:text-slate-500 transition-colors duration-200">
+        WMS Engineering Team &bull; Internal Golden Build Repository
+    </footer>
+
+    <script>
+        let masterData = [];
+
+        // Dark Mode Toggle Function
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+
+            if (html.classList.contains('light')) {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                themeIcon.innerHTML = '&#127774;';
+                themeText.innerText = 'Light Mode';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                themeIcon.innerHTML = '&#9728;';
+                themeText.innerText = 'Dark Mode';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Check user's saved preference on load
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.remove('light');
+                document.documentElement.classList.add('dark');
+                document.getElementById('themeIcon').innerHTML = '&#127774;';
+                document.getElementById('themeText').innerText = 'Light Mode';
+            }
+
+            // Fetch manifest.json dynamically to read all designated CSV files
+            fetch('manifest.json')
+                .then(response => response.json())
+                .then(manifest => {
+                    const files = manifest.files;
+                    let loadedCount = 0;
+
+                    files.forEach(file => {
+                        Papa.parse(file, {
+                            download: true,
+                            header: true,
+                            skipEmptyLines: true,
+                            complete: function(results) {
+                                const cleanedRows = results.data
+                                    .filter(row => row.WMS && row.WMS.trim() !== '')
+                                    .map(row => {
+                                        let cleanRow = {};
+                                        Object.keys(row).forEach(key => {
+                                            let val = row[key] !== undefined && row[key] !== null ? String(row[key]) : '';
+                                            cleanRow[key.trim()] = val.trim();
+                                        });
+                                        
+                                        if (cleanRow['Transactions']) {
+                                            cleanRow['Transactions'] = parseFloat(cleanRow['Transactions']).toString();
+                                        }
+
+                                        if (cleanRow['EDI Map (Reference map identified)']) {
+                                            cleanRow['EDI Map (Reference map identified)'] = cleanRow['EDI Map (Reference map identified)'].replace(/[\r\n]+/g, '');
+                                        }
+
+                                        return cleanRow;
+                                    });
+
+                                masterData = masterData.concat(cleanedRows);
+                                loadedCount++;
+                                
+                                if (loadedCount === files.length) {
+                                    populateWmsDropdown();
+                                    updateTransactionDropdown();
+                                    renderCards(masterData);
+                                }
+                            },
+                            error: function(err) {
+                                console.error("Could not load: " + file);
+                            }
+                        });
+                    });
+                })
+                .catch(err => {
+                    console.error("Error loading manifest.json:", err);
+                    document.getElementById('resultCount').innerText = "Error loading manifest configuration";
+                });
+        });
+
+        function populateWmsDropdown() {
+            const wmsSet = new Set();
+            masterData.forEach(item => {
+                if(item.WMS) wmsSet.add(item.WMS);
+            });
+
+            const wmsSelect = document.getElementById('wmsFilter');
+            wmsSelect.innerHTML = '<option value="ALL">All WMS Systems</option>';
+            
+            Array.from(wmsSet).sort().forEach(wms => {
+                let opt = document.createElement('option');
+                opt.value = wms;
+                opt.innerText = wms;
+                wmsSelect.appendChild(opt);
+            });
+        }
+
+        function onWmsChange() {
+            updateTransactionDropdown();
+            filterData();
+        }
+
+        function updateTransactionDropdown() {
+            const selectedWms = document.getElementById('wmsFilter').value;
+            const txnSelect = document.getElementById('transactionFilter');
+            const currentSelectedTxn = txnSelect.value;
+
+            const txnSet = new Set();
+            masterData.forEach(item => {
+                if (selectedWms === 'ALL' || item.WMS === selectedWms) {
+                    if (item.Transactions) txnSet.add(item.Transactions);
+                }
+            });
+
+            txnSelect.innerHTML = '<option value="ALL">All Transactions</option>';
+            
+            const sortedTxns = Array.from(txnSet).sort((a, b) => a.localeCompare(b, undefined, {numeric: true}));
+
+            sortedTxns.forEach(txn => {
+                let opt = document.createElement('option');
+                opt.value = txn;
+                opt.innerText = `EDI ${txn}`;
+                txnSelect.appendChild(opt);
+            });
+
+            if (txnSet.has(currentSelectedTxn)) {
+                txnSelect.value = currentSelectedTxn;
+            } else {
+                txnSelect.value = 'ALL';
+            }
+        }
+
+        function renderCards(data) {
+            const container = document.getElementById('cardsContainer');
+            const noResults = document.getElementById('noResults');
+            const resultCount = document.getElementById('resultCount');
+            container.innerHTML = '';
+            
+            resultCount.innerText = `${data.length} Scenarios Found`;
+
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            data.forEach(item => {
+                const wmsName = item.WMS || 'Unknown WMS';
+                const txnType = item.Transactions || 'N/A';
+                const mapName = item['EDI Map (Reference map identified)'] || 'No Map Assigned';
+                const scenarioDesc = item['Scenarios Covered'] || 'No scenario details specified.';
+
+                const card = document.createElement('div');
+                card.className = "bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 flex flex-col justify-between hover:shadow-md transition-all duration-200";
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start gap-4 mb-3">
+                            <div>
+                                <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wide uppercase">${wmsName}</span>
+                                <h3 class="text-base font-bold text-slate-900 dark:text-slate-100 mt-0.5">Transaction: EDI ${txnType}</h3>
+                            </div>
+                            <span class="px-2.5 py-1 text-xs font-semibold rounded-md border bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800">Active Map</span>
+                        </div>
+
+                        <div class="bg-indigo-900 dark:bg-indigo-950 text-white rounded-lg p-3.5 mb-4 shadow-sm border border-indigo-800">
+                            <span class="block text-[10px] font-bold text-indigo-300 uppercase mb-0.5 tracking-wider">Identified Reference Map</span>
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="font-mono text-xs text-indigo-100 truncate">${mapName}</span>
+                                <button onclick="navigator.clipboard.writeText('${mapName.replace(/'/g, "\\'")}'); alert('Copied map name to clipboard!');" class="bg-indigo-800 dark:bg-indigo-900 hover:bg-indigo-700 text-indigo-200 text-[10px] font-medium px-2.5 py-1 rounded border border-indigo-700 transition-colors shrink-0">
+                                    Copy
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700/50 rounded-lg p-3.5 mb-4">
+                            <span class="block text-xs font-bold text-slate-400 dark:text-slate-500 uppercase mb-1">Scenarios Covered</span>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line">${scenarioDesc}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterData() {
+            const wmsVal = document.getElementById('wmsFilter').value;
+            const txnVal = document.getElementById('transactionFilter').value;
+            const searchInput = document.getElementById('searchInput');
+            const searchVal = searchInput.value.toLowerCase();
+            const clearBtn = document.getElementById('clearSearchBtn');
+
+            if (searchVal.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            const filtered = masterData.filter(item => {
+                const matchesWms = (wmsVal === 'ALL' || item.WMS === wmsVal);
+                const matchesTxn = (txnVal === 'ALL' || item.Transactions === txnVal);
+                
+                const mapStr = item['EDI Map (Reference map identified)'] || '';
+                const scenStr = item['Scenarios Covered'] || '';
+                const txnStr = item.Transactions || '';
+
+                const matchesSearch = (
+                    mapStr.toLowerCase().includes(searchVal) ||
+                    scenStr.toLowerCase().includes(searchVal) ||
+                    txnStr.toLowerCase().includes(searchVal)
+                );
+                return matchesWms && matchesTxn && matchesSearch;
+            });
+
+            renderCards(filtered);
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            filterData();
+        }
+
+        function resetAllFilters() {
+            document.getElementById('wmsFilter').value = 'ALL';
+            updateTransactionDropdown(); 
+            document.getElementById('transactionFilter').value = 'ALL'; // Explicitly force transaction dropdown back to 'All Transactions'
+            clearSearch();
+        }
+    </script>
+</body>
+</html>

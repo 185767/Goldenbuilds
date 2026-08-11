@@ -1,0 +1,47 @@
+﻿WMS,Transactions,EDI Map (Reference map identified),Scenarios Covered
+AWMS,940,ABC_TR_LITTLE_MARK_IB_940_4010,With code for looped NTE segments mapping
+AWMS,940,ABC_TR_Car_Vadilal_IB_940_4010,This map cover all general 940 scenarios
+AWMS,945,ABC_JOE_CORPORATION_OB_945_4010,"No pallet info - Grouping at Item level for Item code and LT(No MAN Seg)
+ X12 has no MAN segment/ Pallet Level
+-Testing for short ship
+- 0 shipped quantity will be populated with no SSCC labels
+Has mapping for all W12 fields and W03 fields "
+AWMS,945,ABC_ORIGINAL_LOLLY_OB_945_4010,"No pallet info - Grouping at Item level for Item code and LT(No MAN Seg)
+-Testing for short ship
+Not showing 0 shipped(without SSCC Levels)"
+AWMS,945,ABC_TR_DESSERT_ICECREAMS_OB_945_4010,"Has pallet level, grouping at Item level and Pallet level,
+Line Item for each pallet combination mapping included
+Includes mapping for MAN segment, with pallet IDs
+-Testing for short ship scenario
+Not showing 0 shipped quantities in EDI X12 , No SSCC mapping labels "
+AWMS,945,ABC_TR_LITTLE_MARK_OB_945_4010,"Included  mapping for catch quantities
+No pallet info - Grouping at Item level for Item code and LT(No MAN Seg)
+- 0 shipped quantity will be populated"
+AWMS,945,ABC_TR_KIACARNIVAL_FOOD_OB_945_4010,"Map with multiple N9(CaseLevel Details) for each Line Item
+Grouping at W12 for both Pallet ID and Item Code(included in W12 instead of MAN)
+Available only in UAT as AWMS is unable to provide case level details for each item"
+AWMS + JDA mappings included ,945,ABC_BLACKROSE_OB_945_5010,"Version 5010
+Grouped W12 for same Lot and Item code under same LX 
+Mapping includes for both shipped and 0 shipped quantities "
+AWMS,943,ABC_TR_DESERT_STORM_IB_943_4010,943 Map built to ABC Specifications
+AWMS,944,ABC_TR_DESERT_STORM_OB_944_4010,944 map built to ABC Specifications
+AWMS,943,ABC_TR_MilkyMist_IB_943_4010,"943 Map built to partner specifications
+Pallet level information included for each item"
+AWMS,944,ABC_TR_Lactalis_OB_944_5010,"944 Map built to partner specifications
+Version 5010
+-Pallet level information included for each item
+-Concatenate the 943 type/variant information into the ABC GS Sender ID in the outbound 944"
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
