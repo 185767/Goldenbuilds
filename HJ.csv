@@ -1,0 +1,30 @@
+﻿WMS,Transactions,EDI Map (Reference map identified),Scenarios Covered
+HJ,940,ABC_VALLEYMILK_IB_940_4010,"Base Maps for EDI 940 Inbound transaction to HJ (Contains all general 940 scenarios)
+Mapping from W01, G69, N9, QTY segments to 2020, 2030, 2040 records"
+HJ,940,ABC_GLOBAL_MILLS_IB_940_4010,"Base Maps for EDI 940 Inbound transaction to HJ (Contains all general 940 scenarios)
+Mapping from LX, W01 segments to 2020, 2040 records."
+HJ,943,ABC_VALLEYMILK_IB_943_4010,This map cover all general 943 scenarios and don't having any extra or unwanted logics.
+HJ,943,ABC_PURE_MARK_IB_943_4010,We are handling Case details(Case serials and Case weight) in this partner. Multiple N9*SN in particular line Item.
+HJ,947,ABC_VALLEYMILK_IB_947_4010,This map cover all general inbound 947 scenarios. Only 05 and 55 Hold codes.
+HJ,947,ABC_TR_COCONUT_WATER_IB_947_4010,"This map cover all general inbound 947 scenarios.Using ""AMC_CL_HoldReasonCode_Generic"" Codelist to handle the AMC Hold and Reason code."
+HJ,944,ABC_TR_MCCAIN_FARMS_OB_944_4010,This map cover all general 944 scenarios
+HJ,944,ABC_RWESTONMCC_OB_944_5010_HJ,If 5010 Version required  with including MAN segment in the detail level we can use this partner map as a base map.
+HJ,945,ABC_VALLEYMILK_OB_945_4010,This map cover all general 945 scenarios. Inclused MAN segment and also having grouping logic.
+HJ,945,ABC_PURE_MARK_OB_945_4010,"Included Roll-Up logic baded on ItemCode,LotCodeFormat and WarehouseLotCode.Multiple N9*SN in particular line Item.(Handling Case Level details for this Partner)."
+HJ,947,ABC_VALLEYMILK_OB_947_4010,"This map cover all general outbound 947 scenarios.Using ""AMC_CL_HoldReasonCode_Generic"" Codelist to handle the Hold and Reason code."
+HJ,947,ABC_TR_COCONUT_WATER_OB_947_4010,"This map cover all general outbound 947 scenarios.Using ""AMC_CL_HoldReasonCode_Generic"" Codelist to handle the Hold and Reason code."
+HJ,846,ABC_GLOBAL_MILLS_OB_846_4010,Quantity mapping conditions based on HoldQuantity.
+HJ,846,ABC_TR_MCCAIN_FARMS_OB_846_4010,This map cover all general 846 scenarios
+HJ,940,ABC_TR_GOLDEN_PACKING_IB_940_5010,This map covers SPS Commerce spec 5010 version
+HJ,943,ABC_TR_GOLDEN_PACKING_IB_943_5010,This map covers SPS Commerce spec 5010 version
+HJ,944,ABC_TR_GOLDEN_PACKING_OB_944_5010,This map covers SPS Commerce spec 5010 version
+HJ,945,ABC_TR_GOLDEN_PACKING_OB_945_5010,This map covers SPS Commerce spec 5010 version
+HJ,940,ABC_TR_DAKOTA_FOODS_IB_940_4010,This map covers SPS Commerce spec 4010 version
+HJ,943,ABC_TR_DAKOTA_FOODS_IB_943_4010,This map covers SPS Commerce spec 4010 version
+HJ,947,ABC_TR_DAKOTA_FOODS_IB_947_4010,This map covers SPS Commerce spec 4010 version
+HJ,944,ABC_TR_DAKOTA_FOODS_OB_944_4010,This map covers SPS Commerce spec 4010 version
+HJ,945,ABC_TR_DAKOTA_FOODS_OB_945_4010,This map covers SPS Commerce spec 4010 version
+HJ,940,ABC_WORLD_PACKERS_IB_940_4010,This map covers True Commerce spec 4010 version
+HJ,943,ABC_WORLD_PACKERS_IB_943_4010,This map covers True Commerce spec 4010 version
+HJ,944,ABC_WORLD_PACKERS_OB_944_4010,This map covers True Commerce spec 4010 version
+HJ,945,ABC_WORLD_PACKERS_OB_945_4010,This map covers True Commerce spec 4010 version

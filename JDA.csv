@@ -9,10 +9,10 @@ JDA,943,ABC_TR_INDENT_HOMEFOODS_IB_943_4010 ,"1. When the inbound EDI 943 has ju
 JDA,846,ABC_BUSBOARD_FOODS_OB_846_5010 ,"Base Maps for EDI 846 Outbound transaction to JDA (Contains about  60-70% of generic mappings)-
 Grouping logic added for same lot/status/date combination. Based on UOM, the weights were summed up."
 JDA,944,ABC_BUSBOARD_FOODS_OB_944_5010 ,"Base Maps for EDI 944 Outbound transaction to JDA (Contains about  60-70% of generic mappings)- Having quantity greater than zero logic , grouped based on Pallet Number and Product Code."
-JDA,944,ABC_CARGILL_OB_944_JDA_5010,If partner ask Pallet info MAN*GM info use this map.
+JDA,944,ABC_carsons_OB_944_JDA_5010,If partner ask Pallet info MAN*GM info use this map.
 JDA ,944,ABC_TR_INDENT_HOMEFOODS_OB_944_4010,"Pallet-level identifiers (N9*LV) , Batch split indicators(N9*BS) and Batch Number (N9*BT) inculded"
 JDA ,940,ABC_KEMPLOT_IB_940_4010,Following generic 940 IB structure with generic logics.
-JDA ,940,ABC_TR_VENTURA_FOODS_IB_940_4010,"1. Logic to populate New, Revision & Cancellation Order to JDA and Non Allocation Flag to 1 when there is a Chep at the Line item level.
+JDA ,940,ABC_TR_ACE_FOODS_IB_940_4010,"1. Logic to populate New, Revision & Cancellation Order to JDA and Non Allocation Flag to 1 when there is a Chep at the Line item level.
 2. TMS Flag Logic to populate 1 or 0 using codelist (ABC_TMSFLAG_IB_JDA)"
 JDA ,940,ABC_BYSON_IB_940_4010,N9*PIN (Asset Type) at Header Level using CL (ABC_CL_AssetCodes_Generic) codelist to populate Americold Chep item
 JDA ,945,ABC_TR_BUSBOARD_FOODS_OB_945_5010,"Base Maps for EDI 945 Outbound transaction to JDA (Contains about  60-70% of generic mappings)
@@ -20,4 +20,3 @@ Contains MAN*GM  and SSCC grouping Logics."
 JDA ,945,ABC_BYSON_OB_945_4010,"N9*LV (Pallet ), N9 *PC ( DateCode) and Customer Asset Type using (ABC_CL_AssetCodes_Generic) to populate the values"
 JDA ,947,ABC_TR_BUSBOARD_FOODS_OB_947_5010,"If the customers expect the customer-specific hold code, refer this map. Uses customer/CODELIST-driven reason code lookup (ABC_CL_HoldReasonCode_Generic) to validate the adjustment type per customer; if the AdjustmentReasonCode doesn't match the expected code, the flow is dropped."
 JDA ,947,ABC_BYSON_IB_947_4010,The core X12 947 structure (W15 header → N1 WH loop → W19 item detail → N9 references) follows the standard transaction set.Any new 947 outbound build can start from this same skeleton.
-,,,

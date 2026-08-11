@@ -20,7 +20,7 @@ No pallet info - Grouping at Item level for Item code and LT(No MAN Seg)
 AWMS,945,ABC_TR_KIACARNIVAL_FOOD_OB_945_4010,"Map with multiple N9(CaseLevel Details) for each Line Item
 Grouping at W12 for both Pallet ID and Item Code(included in W12 instead of MAN)
 Available only in UAT as AWMS is unable to provide case level details for each item"
-AWMS + JDA mappings included ,945,ABC_BLACKROSE_OB_945_5010,"Version 5010
+AWMS + JDA  ,945,ABC_BLACKROSE_OB_945_5010,"Version 5010
 Grouped W12 for same Lot and Item code under same LX 
 Mapping includes for both shipped and 0 shipped quantities "
 AWMS,943,ABC_TR_DESERT_STORM_IB_943_4010,943 Map built to ABC Specifications
@@ -31,17 +31,3 @@ AWMS,944,ABC_TR_Lactalis_OB_944_5010,"944 Map built to partner specifications
 Version 5010
 -Pallet level information included for each item
 -Concatenate the 943 type/variant information into the ABC GS Sender ID in the outbound 944"
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
