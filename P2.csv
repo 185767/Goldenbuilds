@@ -1,25 +1,34 @@
 ﻿WMS,Transactions,EDI Map (Reference map identified),Scenarios Covered
-P2,856,ABC_TR_DELMARVA_IB_856_5010,"Base Maps for EDI 856 Inbound transaction to P2 (Contains about  60-70% of generic mappings)
-Use this mapping as the reference for dynamic routing logic when converting 856 transactions to either 943 Canonical or 858 Canonical based on the MAN segment.
+P2,856,AMC_TR_DELMONTE_IB_856_5010,"Base Maps for EDI 856 Inbound transaction to P2 (Contains about  60-70% of generic mappings)
+
+1. Use this mapping as the reference for dynamic routing logic when converting 856 transactions to either 943 Canonical or 858 Canonical based on the MAN segment.
+
 Use this map when we receive MAN segment segment is 856IB file"
-P2,856,ABC_MONTANA_CRATE_BEEF_IB_856_4010,Use this mapping as the reference for 943 canonical if we receive 856 inpute file without MAN segment.
-P2,943,ABC_SIMMS_READY_MEALS_IB_943_4010,Use this mapping as the reference when we receive multiple N9 segment under Item level
-P2,943,ABC_WAYNE_POULTRY_IB_943_4010,With roll up logic for ProductCode and ProductStatus code included and send as an 943
-P2,943,ABC_GOLDENBALL_IB_943_5010,943 to send as an 858 with Pallet information coming in the Line Item(W07) with Line number & Batch Number 
-P2,943,ABC_GOOD_FOODS_IB_943_4010,"943 to send as an 858 with Pallet information N9*LV , Line number N9*LI & Batch Number N9*PC in EDI file"
-P2,944,ABC_BYSON_944_OB_4010,Use this mapping as the reference when we need to send multiple N9 segment under Item level
-P2,944,ABC_PROAGRA_BRANDS_OB_944_4010,This map having grouping Logic based on ProductCode and BatchCode for Item level
-P2,940,ABC_BYSON_IB_940_4010 OR ABC_TR_PROAGRA_BRANDS_IB_940_4010,Use this mapping as the reference when we receive multiple N9 and NTE segment in the header level
-P2,945,ABC_TR_PROAGRA_BRANDS_OB_945_4010,"Use this mapping as the reference when partner needs 
+P2,856,AMC_COLORADO_BOXED_BEEF_IB_856_4010,1. Use this mapping as the reference for 943 canonical if we receive 856 inpute file without MAN segment.
+P2,943,AMC_SIMMONS_PREPARED_FOODS_IB_943_4010,1.Use this mapping as the reference when we receive multiple N9 segment under Item level
+P2,943,AMC_WAYNEFARMS_IB_943_4010,With roll up logic for ProductCode and ProductStatus code included and send as an 943
+P2,943,AMC_BUTTERBALL_IB_943_5010,943 to send as an 858 with Pallet information coming in the Line Item(W07) with Line number & Batch Number 
+P2,943,AMC_OK_FOODS_IB_943_4010,"943 to send as an 858 with Pallet information N9*LV , Line number N9*LI & Batch Number N9*PC in EDI file"
+P2,944,AMC_TYSON_944_OB_4010,1.Use this mapping as the reference when we need to send multiple N9 segment under Item level
+P2,944,AMC_CONAGRA_BRANDS_OB_944_4010,This map having grouping Logic based on ProductCode and BatchCode for Item level
+P2,940,"AMC_TYSON_IB_940_4010
+AMC_TR_CONAGRA_BRANDS_IB_940_4010",Use this mapping as the reference when we receive multiple N9 and NTE segment in the header level
+P2,945,AMC_TR_CONAGRA_BRANDS_OB_945_4010,"Use this mapping as the reference when partner needs 
 MAN segment. Also having  grouping Logic based on SSCC18 and VendorItemCode for Item level"
-P2,945,ABC_BYSON_OB_945_4010,"Use this mapping as the reference when MAN segment not needed 
+P2,945,AMC_TYSON_OB_945_4010,"Use this mapping as the reference when MAN segment not needed 
 instead pallet send in N9.LV below item level"
-P2,945,ABC_LAKEVIEW_945_OB_4010,"Use this mapping as the reference when we need to pass entire
+P2,945,AMC_LEPRINO_945_OB_4010,"Use this mapping as the reference when we need to pass entire
 values in the W12 segment fields (Item level)"
-P2,856,ABC_ROCKMART_OB_856_5010,Base Maps for EDI 856 Outbound transaction to P2 (Contains about  60-70% of generic mappings)
-AWMS + RP + HJ + JDA + P2,846,ABC_BYSON_846_OB_4010,"Base Maps for EDI 846 Outbound transaction to P2 (Contains about  60-70% of generic mappings)
-Tyson 846 used by all WMS locations, using Tyson-specific hold codes, consolidates Lot Code, Date Code, and Hold Code data, applies summation logic, and outputs Net or Gross Weight in the 846 file."
-P2,846,ABC_TR_PROAGRA_BRANDS_OB_846_4010,"Conagra 846 is WMS with Single location with Multiple accounts(0003,0001,0007) combination using codelist."
-P2,947,AMC_TYSON_OB_947_4010,Base Maps for EDI 947 Outbound transaction to P2 (Contains about  60-70% of generic mappings)
+P2,856OB,AMC_Walmart_OB_856_5010,Base Maps for EDI 856 Outbound transaction to P2 (Contains about  60-70% of generic mappings)
+P2,846OB,"AMC_TYSON_846_OB_4010
+AMC_TR_CONAGRA_BRANDS_OB_846_4010","Base Maps for EDI 846 Outbound transaction to P2 (Contains about  60-70% of generic mappings)
+
+Tyson 846 used by all WMS locations, using Tyson-specific hold codes, consolidates Lot Code, Date Code, and Hold Code data, applies summation logic, and outputs Net or Gross Weight in the 846 file.
+
+Conagra 846 is WMS with Single location with Multiple accounts(0003,0001,0007) combination using codelist."
+P2,947OB,AMC_TYSON_OB_947_4010,Base Maps for EDI 947 Outbound transaction to P2 (Contains about  60-70% of generic mappings)
+P2,947IB,"AMC_TYSON_IB_947_4010
+AMC_LEPRINO_IB_947_4010","Base Maps for EDI 947 Outbound transaction to P2 (Contains about  60-70% of generic mappings)
+Not many customers using inbound 947 on P2, hence two maps provided as samples,both are doing status change (05,55)."
 P2,947,ABC_BYSON_OB_947_4010 OR ABC_LAKEVIEW_IB_947_4010,"Base Maps for EDI 947 Outbound transaction to P2 (Contains about  60-70% of generic mappings)
 Not many customers using inbound 947 on P2, hence two maps provided as samples,both are doing status change (05,55)."

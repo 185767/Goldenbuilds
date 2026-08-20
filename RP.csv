@@ -1,12 +1,12 @@
 ﻿WMS,Transactions,EDI Map (Reference map identified),Scenarios Covered
-RP,940,ABC_SWEETPASTRY_IB_940_4010,Base Maps for EDI 940 Inbound transaction to RP (Contains about  60-70% of generic mappings)
-RP,940,ABC_QUEENS_SAMOAN_IB_940_4010,Base Maps for EDI 940 Inbound transaction to RP.Contains all general 940 scenarios. Handling multiple N9 segments.
-RP,943,ABC_SWEETPASTRY_IB_943_4010,Base Maps for EDI 943 Inbound transaction to RP (Contains about  60-70% of generic mappings)
-RP,943,ABC_SOARCOOKING_IB_943_4010,Handling Multiple N9 in detail level. Base map for 943 inbound transaction RP. Contains all general 943 scenarios.
-RP,944,ABC_SWEETPASTRY_944_OB_4010,Base Maps for EDI 944 Outbound transaction to RP (Contains about  60-70% of generic mappings)
-RP,944,ABC_MONTANA_CRATE_BEEF_OB_944_4010,Includes grouping logic. Handling multiple N9 in detail level.
-RP,945,ABC_SWEETPASTRY_OB_945_X12_4010,Base Maps for EDI 945 Outbound transaction to RP .Contains generic mappings.
-RP,945,ABC_PRIME_MEATS_945_OB_4010,Base map when MAN segment is there and also included grouping logic and covers all the generic 945 scenarios.
-RP,947,ABC_SWEETPASTRY_947_OB_4010,Base Map for EDI 947 Outbound Transacction to RP. Covers all the basic or general logic.
-RP,947,ABC_QUEENS_SAMOAN_947_OB_4010 ,More Partner specific and handling multiple N9 segments in detail level
-RP,947,ABC_TR_QUEENS_SAMOAN_IB_947_4010,Base Maps for EDI 947 Inbound transaction to RP (Contains about  60-70% of generic mappings)
+RP,940,AMC_BELPASTRY_IB_940_4010,Base Maps for EDI 940 Inbound transaction to RP (Contains about  60-70% of generic mappings)
+RP,940,AMC_KINGS_HAWAIIAN_IB_940_4010,Base Maps for EDI 940 Inbound transaction to RP.Contains all general 940 scenarios. Handling multiple N9 segments.
+RP,943,AMC_BELPASTRY_IB_943_4010,Base Maps for EDI 943 Inbound transaction to RP (Contains about  60-70% of generic mappings)
+RP,943,AMC_RISEBAKING_IB_943_4010,Handling Multiple N9 in detail level. Base map for 943 inbound transaction RP. Contains all general 943 scenarios.
+RP,944,AMC_BELPASTRY_944_OB_4010,Base Maps for EDI 944 Outbound transaction to RP (Contains about  60-70% of generic mappings)
+RP,944,AMC_COLORADO_BOXED_BEEF_OB_944_4010,Include grouping logic. Handling multiple N9 in detail level.
+RP,945,AMC_BELPASTRY_OB_945_X12_4010,Base Maps for EDI 945 Outbound transaction to RP .Contains generic mappings.
+RP,945,AMC_QUALITY_SUASAGE_945_OB_4010,Base map when MAN segment is there and also included grouping logic and covers all the generic 945 scenarios.
+RP,947,AMC_BELPASTRY_947_OB_4010,Base Map for EDI 947 Outbound Transacction to RP. Covers all the basic or general logic.
+RP,947,AMC_KINGS_HAWAIIAN_947_OB_4010 ,More Partner specific and handling multiple N9 segments in detail level
+RP,947,AMC_TR_KINGS_HAWAIIAN_IB_947_4010,Base Maps for EDI 947 Inbound transaction to RP (Contains about  60-70% of generic mappings)
